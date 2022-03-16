@@ -26,7 +26,8 @@ public class TweetService {
 		tweet.setUserId(user.getId());
 		tweet.setHandle(user.getUsername());
 		
-		return tweetRepository.insert(tweet);
+		Tweet newTweet =  tweetRepository.insert(tweet);
+		return newTweet;
 	}
 	
 	public Tweet addReplytoTweet(String tweetId, Tweet newTweet, User user) {

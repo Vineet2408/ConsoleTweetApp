@@ -33,6 +33,9 @@ public class ConsoleUi {
 	
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	Validator validator;
 	
 	public ConsoleUi() {
 		
@@ -208,7 +211,7 @@ public class ConsoleUi {
 		String username = "";
 		int i=0;
 		while (true) {
-			if (validateUsername(username)) {
+			if (validator.validateUsername(username)) {
 				return username;
 			}
 			else if (i > 0) {
@@ -219,13 +222,7 @@ public class ConsoleUi {
 		}
 	}
 
-	private boolean validateUsername(String username) {
-		// TODO Auto-generated method stub
-		if (username.contains(" ")) {
-			return false;
-		}
-		return username.length() >= 10 ? true : false;
-	}
+
 	
 	private void printPasswordCriteria() {
 		System.out.println("Password must contain at least one digit [0-9].");
@@ -243,7 +240,7 @@ public class ConsoleUi {
 			System.out.println("Enter New Password");
 			printPasswordCriteria();
 			while (true) {
-				if (validatePassword(password)) {
+				if (validator.validatePassword(password)) {
 					break;
 				}
 				else if (i > 0) {
@@ -265,17 +262,7 @@ public class ConsoleUi {
 	}
 	
 	
-	private boolean validatePassword(String password) {
-		// TODO Auto-generated method stub
-		String passwordRegex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,30}";
-		 if (password.length() < 8 ) {
-			 return false;
-		 }
-		 if (password.matches(passwordRegex)) {
-			 return true;
-		 }
-		 return false;
-	}
+
 
 	public void printInvalidOptionEntered() {
 		// TODO Auto-generated method stub

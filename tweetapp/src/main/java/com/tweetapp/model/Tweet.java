@@ -33,6 +33,14 @@ public class Tweet {
 		this.replyList = replyList;
 		this.date = date;
 	}
+	public Tweet(String tweetedTo, String message, List<String> replyList, LocalDateTime date, String userId) {
+		super();
+		this.tweetedTo = tweetedTo;
+		this.message = message;
+		this.replyList = replyList;
+		this.date = date;
+		this.userId=userId;
+	}
 	
 	
 
