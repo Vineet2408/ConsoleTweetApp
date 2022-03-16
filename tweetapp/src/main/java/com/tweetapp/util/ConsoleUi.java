@@ -71,15 +71,16 @@ public class ConsoleUi {
 	}
 
 	public Tweet takeTweetDataFromUser() throws IOException {
-		System.out.println("Enter the Hanlde");
-		String handle = br.readLine();
+
 		System.out.println("Enter the Message");
 		String message = br.readLine();
+		
 		User user= LoggedInUser.user;
+		
+		System.out.println("LoggedIn User = "+ user.getFirstName() + " " + user.getId());
 				
 		// create a new Tweet
-		Tweet tweet = new Tweet("newTweet", message, LocalDateTime.now(), user.getAvatarLink(), user.getUsername(), user.getId(), handle, new ArrayList<>());
-		tweetService.addTweetForUser(tweet, user);
+		Tweet tweet = new Tweet(null, message,new ArrayList<String>(), LocalDateTime.now());
 		return tweet;
 		
 	}

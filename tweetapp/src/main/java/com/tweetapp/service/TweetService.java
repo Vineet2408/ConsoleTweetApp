@@ -1,6 +1,5 @@
 package com.tweetapp.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,10 +24,9 @@ public class TweetService {
 	
 	public Tweet addTweetForUser(Tweet tweet, User user) {
 		tweet.setUserId(user.getId());
-		tweet.setUsername(user.getUsername());
-		tweet.setAvatarLink(user.getAvatarLink());
-		tweet.setDate(LocalDateTime.now());
-		return this.tweetRepository.insert(tweet);
+		tweet.setHandle(user.getUsername());
+		
+		return tweetRepository.insert(tweet);
 	}
 	
 	public Tweet addReplytoTweet(String tweetId, Tweet newTweet, User user) {
