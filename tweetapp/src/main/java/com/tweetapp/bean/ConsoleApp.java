@@ -36,7 +36,7 @@ public class ConsoleApp {
 		boolean showMenu = true;
 		do {
 			
-			boolean isUserLoggedIn = LoggedInUser.loggedIn;// some function will return if user is loggedIn or not
+			boolean isUserLoggedIn = LoggedInUser.isUserLoggedIn();// some function will return if user is loggedIn or not
 
 			if (isUserLoggedIn) {
 				ui.printMenuLoggedInUser();
@@ -45,11 +45,11 @@ public class ConsoleApp {
 				{
 					case 1:
 						Tweet tweet = ui.takeTweetDataFromUser();
-						tweetService.addTweetForUser(tweet, LoggedInUser.user);
+						tweetService.addTweetForUser(tweet, LoggedInUser.getUser());
 						break;
 						
 					case 2:
-						List<Tweet> allUserTweets = tweetService.getAllTweetByUserId(LoggedInUser.user.getId());
+						List<Tweet> allUserTweets = tweetService.getAllTweetByUserId(LoggedInUser.getUser().getId());
 						ui.displayAllTweets(allUserTweets);
 						break;
 						
@@ -68,8 +68,10 @@ public class ConsoleApp {
 						break;
 						
 					case 6:
-						LoggedInUser.user = null;
-						LoggedInUser.loggedIn=false;
+						UserCredentials creds = new UserCredentials();
+
+						creds.setUserId(LoggedInUser.getUserId());
+						userService.logoutUser(creds);
 						isUserLoggedIn = false;
 						break;
 						
@@ -88,8 +90,8 @@ public class ConsoleApp {
 						User newUser= ui.takeAllUserInfoForRegistration();
 						User registeredUser = userService.registerUser(newUser);
 						System.out.println("Your Details are Registered \n" +registeredUser);
-						LoggedInUser.user=registeredUser;
-						LoggedInUser.loggedIn = true;
+						LoggedInUser.setUser(registeredUser);
+						LoggedInUser.setUserLoggedIn(true);
 						
 						break;
 						

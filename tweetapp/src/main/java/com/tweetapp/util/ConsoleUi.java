@@ -63,12 +63,12 @@ public class ConsoleUi {
 	public UserCredentials takeLoginCredentials() throws IOException {
 		UserCredentials userCredentials = new UserCredentials();
 		System.out.println("Enter Your Email");
-		String email = sc.nextLine();
+		String email = br.readLine();
 		
 		System.out.println("Enter the Password");
 		String password = br.readLine();
 		
-		userCredentials.setEmail(email);
+		userCredentials.setId(email);
 		userCredentials.setPassword(password);
 		return userCredentials;
 	}
@@ -78,7 +78,7 @@ public class ConsoleUi {
 		System.out.println("Enter the Message");
 		String message = br.readLine();
 		
-		User user= LoggedInUser.user;
+		User user= LoggedInUser.getUser();
 		
 		System.out.println("LoggedIn User = "+ user.getFirstName() + " " + user.getId());
 				
